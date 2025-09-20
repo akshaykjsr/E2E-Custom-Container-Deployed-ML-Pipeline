@@ -28,14 +28,14 @@ def train_and_save(df: pd.DataFrame, out_dir: str, train_split: float,
 
     feature_cols = [
         c for c in df.columns
-        if c not in ["Date", "ED_patient_volume", "log_ED_volume", "is_non_zero"]
+        if c not in ["Date", "col1", "col2", "col3"]
     ]
 
     scaler = StandardScaler()
     X_train = scaler.fit_transform(train_df[feature_cols])
     X_test  = scaler.transform(test_df[feature_cols])
-    y_train = train_df["log_ED_volume"]
-    y_test  = test_df["log_ED_volume"]
+    y_train = train_df["col2"]
+    y_test  = test_df["col2"]
 
     model = xgb.XGBRegressor(
         n_estimators=n_estimators,
